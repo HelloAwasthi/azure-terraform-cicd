@@ -1,0 +1,30 @@
+name: "Project 1: Terraform CI"
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  terraform-ci:
+    name: "Check Terraform Quality"
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: 1. Format Check
+        run: terraform fmt -check
+
+      - name: 2. Initialization
+        run: terraform init -backend=false 
+
+      - name: 3. Validation
+        run: terraform validate
+
+      - name: 4. The Plan
+        run: terraform plan -input=false # disables interactive prompts
