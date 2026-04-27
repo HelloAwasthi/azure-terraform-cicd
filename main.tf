@@ -7,7 +7,7 @@ terraform {
   }
   backend "azurerm" {
     resource_group_name  = "tfstate-rg"
-    storage_account_name = "akshatstate777" # Use YOUR storage account name
+    storage_account_name = "akshat777" # Use YOUR storage account name
     container_name       = "tfstate"
     key                  = "project2.tfstate" # The name of the memory file
   }
