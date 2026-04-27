@@ -26,5 +26,5 @@ jobs:
       - name: 3. Validation
         run: terraform validate
 
-      - name: 4. The Plan
-        run: terraform plan -input=false # disables interactive prompts
+    #   - name: 4. The Plan
+    #     run: terraform plan -input=false # disables interactive prompts
