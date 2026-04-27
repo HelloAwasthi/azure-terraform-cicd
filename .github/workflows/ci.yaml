@@ -9,6 +9,13 @@ jobs:
   terraform-ci:
     name: "Check Terraform Quality"
     runs-on: ubuntu-latest
+
+    # We put the secrets here so every step below can see them
+    env:
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
     
     steps:
       - name: Checkout Code
@@ -21,10 +28,10 @@ jobs:
         run: terraform fmt -check
 
       - name: 2. Initialization
-        run: terraform init -backend=false 
+        run: terraform init  #no backend now we need to initialize backend and conncet to azure so no-backend=false
 
       - name: 3. Validation
         run: terraform validate
 
-    #   - name: 4. The Plan
-    #     run: terraform plan -input=false # disables interactive prompts
+      - name: 4. The Plan
+        run: terraform plan -input=false # disables interactive prompts
